@@ -97,6 +97,8 @@ alias pup='sudo pacman -Syu'
 alias pin='sudo pacman -S'
 alias yup='yaourt -Syua'
 alias yin='yaourt -S'
+alias pun='sudo pacman -Rns'
+alias yun='yaourt -Rns'
 #alias tftp='sudo python3 /home/sr/.tftpgui/tftpgui.py'
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq) && # pacman -Sc && sudo pacman-optimize'
 # To see something coming into ls output: lss
