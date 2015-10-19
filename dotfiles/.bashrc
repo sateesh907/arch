@@ -1,10 +1,4 @@
 #!/bin/bash
-# based on a function found in bashtstyle-ng 5.0b1
-# Original author Christopher Roy Bratusek (http://www.nanolx.org)
-# Last arranged by ayoli (http://ayozone.org) 2008-02-04 17:16:43 +0100 CET
-#screenfetch
- # Default Programs
-#export NMON=cmknt
 
 export EDITOR="subl3"
 export PAGER="less"
