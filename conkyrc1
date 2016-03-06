@@ -1,0 +1,102 @@
+
+  total_run_times 0		
+  background yes	
+
+  cpu_avg_samples 1		
+  net_avg_samples 1		
+
+
+  double_buffer yes		
+  no_buffers yes		
+  text_buffer_size 1024		
+
+
+  out_to_console no		
+  update_interval 1		
+
+
+alignment top_right
+
+minimum_size 0 0
+  maximum_width 300		
+ 
+gap_x 4
+gap_y 0
+ 
+  draw_shades no		
+  draw_outline no		
+  draw_borders no		
+  border_width 1		
+  border_inner_margin 1		
+ #############################
+# - Window specifications - #
+#############################
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+
+  use_xft yes			
+  xftalpha .1			
+  override_utf8_locale yes 	
+  uppercase no			
+  use_spacer no			
+ #---
+  xftfont saxMono:size=9 	
+ #---
+  stippled_borders 5		
+
+
+  default_color FFFFFF 		
+  default_shade_color 333333	
+  default_outline_color black	
+ #---
+  color1 838578 		
+  color2 FFFFFF #66FF33         BF0A0D
+  color3 7AA6CC 		
+  color4 FF4719
+
+
+own_window_argb_value 0
+own_window_argb_visual yes
+own_window_colour 000000
+TEXT
+${voffset -5}${color1}${font Cornucopia of Dingbats Four:size=24}t${font pulse sans virgin:size=20}${alignr}SATEESH REDDY ${font Cornucopia of Dingbats Four:size=22}s${font}
+${voffset -7}${color1}${hr}
+${color2}${font StyleBats:size=22}c${font} ${voffset -3}${offset -2}System
+${offset 35}${color1}Uptime : ${color3}${uptime}
+${offset 35}${color1}Kernel  : ${color3}${kernel}
+${offset 35}${color1}Battery : ${color3}${battery_percent BAT0}%
+
+${voffset -19}${color2}${font StyleBats:size=16}a${font} CPU ${cpu cpu}%
+${offset 35}${color1}Core 1 : ${color3}${execi 30 sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}°C${goto 150}${color3}${cpu cpu1}%${color1}${alignr}${color3}${freq_g 1}GHz
+${offset 35}${color1}${cpugraph cpu1 25,0 9C9E8A BF0A0D}
+${offset 35}${color1}Core 2 : ${color3}${execi 30 sensors | grep 'Core 1' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}°C${goto 150}${color3}${cpu cpu2}%${color1}${alignr}${color3}${freq_g 2}GHz
+${offset 35}${color1}${cpugraph cpu2 25,0 9C9E8A BF0A0D}
+
+${voffset -19}${color2}${font StyleBats:size=16}p${font} Memory
+${offset 35}${color1}RAM:${color3}$memperc%${goto 110}${color1}${goto 100}${color1}Used:${color3}$mem ${color1}${alignr}Size:${color3}$memmax
+${offset 35}${color1}${membar 9}
+${offset 35}${color1}SWAP:${color3}$swapperc%${goto 110}${color1}${goto 100}${color1}Used:${color3}$swap ${color1}${alignr}Size:${color3}$swapmax
+${offset 35}${color1}${swapbar 9}
+
+${voffset -19}${color2}${font StyleBats:size=16}q${font} Processes ${processes}
+${offset 35}${color1}NAME : ${running_processes}${goto 155}MEM${goto 200}PID${alignr}PROC
+${offset 35}${color3}${top name 1}${goto 148}${top mem 1}${goto 190}${top pid 1}${alignr}${top cpu 1}
+${offset 35}${color3}${top name 2}${goto 148}${top mem 2}${goto 190}${top pid 2}${alignr}${top cpu 2}
+${offset 35}${color3}${top name 3}${goto 148}${top mem 3}${goto 190}${top pid 3}${alignr}${top cpu 3}
+${offset 35}${color3}${top name 4}${goto 148}${top mem 4}${goto 190}${top pid 4}${alignr}${top cpu 4}
+${offset 35}${color3}${top name 5}${goto 148}${top mem 5}${goto 190}${top pid 5}${alignr}${top cpu 5}
+
+${voffset -19}${color2}${font StyleBats:size=16}e${font} Hard Drive ${execi 120 hddtemp /dev/sda -n --unit=C}°C
+${offset 35}${color1}/root${goto 90}Used:${color3}${fs_used /}${alignr}${color1}Free: ${color3}${fs_free /}
+${offset 35}${color1}${fs_bar 9 /}
+${offset 35}${color1}/home${goto 90}Used:${color3}${fs_used /home}${alignr}${color1}Free: ${color3}${fs_free /home}
+${offset 35}${color1}${fs_bar 9 /home}
+
+${if_existing /proc/net/route wlo1}${voffset -19}${color2}${font StyleBats:size=16}5${font} WLAN
+${offset 35}${color1}Up   : ${color3}${upspeed wlo1}${alignr}${color1}Total : ${color3}${totalup wlo1}
+${offset 35}${color1}${upspeedgraph wlo1 25,0 9C9E8A BF0A0D}
+${offset 35}${color1}Down : ${color3}${downspeed wlo1}${alignr}${color1}Total : ${color3}${totaldown wlo1}
+${offset 35}${color1}${downspeedgraph wlo1 25,0 9C9E8A BF0A0D}${endif}
